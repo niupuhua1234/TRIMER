@@ -3,7 +3,7 @@
 load('ecoli_prom_growth_data.mat');
 load('E.colidataset.mat')
 model.rxns=replace(model.rxns,'_e','[e]');
-trimber=cobra_to_trimber(model);
+trimer=cobra_to_trimer(model);
 
 
 %% PROM running 
@@ -33,9 +33,9 @@ else
     [probtfgene,elm_xn]              =prob_estimation(expression,expressionid,regulator,targets,'thresh_value',datathreshvals);
 end
 
-%trimber=change_bound(trimber, [ -10     0   -10   -10   -15   -15   -10   -10   -55],'l',source);  
-[lb_est,ub_est,rxn_affected,vmax]  =regulatory_bound(trimber,regulator,targets,probtfgene,'bnumstobekoed',ko_tf);     
-[f,v,status1]       =ko_prediction(trimber,ko_tf,lb_est,ub_est,rxn_affected,vmax,'growth_pos',growth_pos,'method','sfba');   
+%trimer=change_bound(trimer, [ -10     0   -10   -10   -15   -15   -10   -10   -55],'l',source);  
+[lb_est,ub_est,rxn_affected,vmax]  =regulatory_bound(trimer,regulator,targets,probtfgene,'bnumstobekoed',ko_tf);     
+[f,v,status1]       =ko_prediction(trimer,ko_tf,lb_est,ub_est,rxn_affected,vmax,'growth_pos',growth_pos,'method','sfba');   
 
 result=[0.042666667	0.038666667	0.039666667	0.04	0.039	0.040333333	0.039	0.039333333		            0	0	0	0.039333333	0	0.038	                    	0.04	0.040333333];
 %0.042666667	0.038666667	0.039666667	0.04	0.039	0.040333333	0.039	0.039333333		0.038333333 0	0	0	0.039333333	0	0.038	0.039333333 0.039666667	0.04	0.040333333
