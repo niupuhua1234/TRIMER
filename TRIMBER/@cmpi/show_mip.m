@@ -31,7 +31,7 @@ p.addParamValue('rowidxs',1 : nrows);
 p.addParamValue('varidxs',1 : nvars);
 p.addParamValue('rownames',default_rownames);
 p.addParamValue('varnames',default_varnames);
-p.addParamValue('showvars',true);
+p.addParamValue('showvars',false);
 
 p.parse(varargin{:});
 
@@ -69,8 +69,11 @@ if isfield(mip,'sense')
 else
     sense = 1;
 end
-fprintf('\n\nOptimization sense:  %s', ...
-        iif(sense == 1,'minimize','maximize'));
+if sense==1
+    fprintf('\n\nOptimization sense:  %s','minimize')
+else
+    fprintf('\n\nOptimization sense:  %s', 'maximize');
+end
 
 % show quadratic
 qptype = cmpi.miqp_type(mip);
@@ -147,43 +150,6 @@ for r = 1 : length(rowidxs)
     end
     fprintf('%g\n',mip.b(row));
     pb.stop_wrap;
-end
-
-% show indicators
-if isfield(mip,'ind') && any(mip.ind)
-    fprintf('\n\n----- Indicators -----\n');
-    rows = find(mip.ind);
-    inds = mip.ind(rows);
-    types = mip.indtypes(rows);
-    for i = 1 : length(inds)
-        if types(i) == 'p'
-            fprintf('   %s  => %s\n',rownames{rows(i)},varnames{inds(i)});
-        else
-            fprintf('   %s <=> %s\n',rownames{rows(i)},varnames{inds(i)});
-        end
-    end
-end
-
-% show bindings
-if isfield(mip,'bounds') && any(mip.bounds.var)
-    vars = convert_ids(mip.varnames,mip.bounds.var);
-    inds = convert_ids(mip.varnames,mip.bounds.ind);
-    fprintf('\n\n----- Binding Constraints -----\n');
-    for i = 1 : length(vars)
-        if mip.bounds.type(i) == 'b'
-            fprintf('   %s <= %s <= %s\n', ...
-                    make_coef_name_pair(mip.lb(mip.bounds.var(i)), ...
-                                        inds{i},true), ...
-                    vars{i}, ...
-                    make_coef_name_pair(mip.ub(mip.bounds.var(i)), ...
-                                        inds{i},true));
-        else
-            fprintf('   %s <= %s\n', ...
-                    vars{i}, ...
-                    make_coef_name_pair(mip.ub(mip.bounds.var(i)), ...
-                                        inds{i},true));
-        end
-    end
 end
 
 if showvars

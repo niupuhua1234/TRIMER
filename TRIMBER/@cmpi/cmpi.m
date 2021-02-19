@@ -172,6 +172,7 @@ methods (Static)
     % external static methods
     [sol] = solve_mip(mip)
     [tf] = verify_sol(milp,sol,tol)
+    [val] = check_field(field,structure)
     show_mip(mip,rowidxs,colidxs,rownames,colnames,showvars)
     [opts,cplex] = set_cplex_opts(options,cplex)
     [flag] = get_cplex_flag(status)

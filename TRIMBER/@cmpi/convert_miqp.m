@@ -53,7 +53,7 @@ elseif has_Qd
     end
 elseif has_Qc
     mip.Q = spalloc(n,n,nnz(mip.Qc.w));
-    Nadd = count(mip.Qc.w);
+    Nadd = length(find(mip.Qc.w));
     mip = add_column(mip,Nadd,'c');
     mip = add_row(mip,Nadd);
     rowidx = m;
