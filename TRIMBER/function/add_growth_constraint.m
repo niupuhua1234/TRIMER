@@ -1,4 +1,4 @@
-function [trimer] = add_growth_constraint(trimer,val)
+function [trimer] = add_growth_constraint(trimer,pos,val,varargin)
 % ADD_GROWTH_CONSTRAINT  Add minimum growth constraint to a model.
 %
 %   [TRIMER,SOL] = ADD_GROWTH_CONSTRAINT(TRIMER,VAL,...params...)
@@ -28,9 +28,16 @@ p.addParamValue('ctype','>');
 p.addParamValue('valtype','frac');
 p.parse(varargin{:});
 
-value = val;
+
+switch p.Results.valtype
+    case 'frac'
+        sol = fba(trimer);
+        value = val*sol.val;
+    case 'abs'
+        value = val;
+end
 trimer = add_row(trimer,1);
-trimer.A(end,:) = trimer.obj';
+trimer.A(end,pos)=1;
 trimer.b(end) = value;
 trimer.ctypes(end) = p.Results.ctype;
 trimer.rownames{end} = 'GROWTH';

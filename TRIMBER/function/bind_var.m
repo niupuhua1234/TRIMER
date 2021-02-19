@@ -44,6 +44,13 @@ assert(length(vars) == length(inds), ...
 [vars,var_idxs] = convert_ids(trimer.varnames,vars);
 [inds,ind_idxs] = convert_ids(trimer.varnames,inds);
 
+
+ lnrl=T_linalg({{eye(nRxns),trimer.rxns},{ -diag(trimer.ub -WT_upperTol ) ,var_bin}},'<',WT_upperTol);
+ lnru=T_linalg({{eye(nRxns),trimer.rxns},{-diag(trimer.lb-WT_lowerTol ) ,var_bin}},'>',WT_lowerTol);  % constraint for A*v=0, ¦Á+v>0, v-¦Â<0
+ lnub=T_linalg({eye(nRxns),trimer.rxns},'<',trimer.ub);
+ lnlb=T_linalg({eye(nRxns),trimer.rxns},'>',trimer.lb);  % constraint for A*v=0, ¦Á+v>0, v-¦Â<0
+
+
 N = length(var_idxs);
 A = zeros(2*N,size(trimer.A,2));
 ctypes = repmat(' ',2*N,1);
