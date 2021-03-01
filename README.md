@@ -32,7 +32,9 @@ Transcriptional regulation plays a key role in controlling metabolism and a fore
 The construction of an integrated metabolic-regulatory network using TRIMER requires the following: 1) the reconstructed genome scale metabolic network 2) regulatory network structure, consisting of transcription factors (TF) and their targets 3) gene expression data.  We used TRIMER to build genome-scale models for various model organisms and showed that TRIMER can detect drug targets, identify gene knockout phenotypes with accuracies as high as 95% and predict microbial growth-rates of transcription factor knockout strains quantitatively with correlation of 0.96.
 
 ## Structure of the code
-
+<p align="center">
+  <a href="https://github.com/niupuhua1234/TRIMER"> <img width="2500px" src="https://github.com/niupuhua1234/TRIMER/blob/main/code_structure.png"></a> 
+</p>
 ## Install
 
 This module depends upon a knowledge of [Markdown]().
