@@ -8,6 +8,7 @@
 </p>
 --------------------------------------------------------------------------------
 # Welcome to EEG Deep Learning Library
+
 **EEG-DL** is a Deep Learning (DL) library written by [TensorFlow](https://www.tensorflow.org) for EEG Tasks (Signals) Classification. It provides the latest DL algorithms and keeps updated. 
 
 
