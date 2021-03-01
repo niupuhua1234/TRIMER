@@ -14,8 +14,7 @@
 
 # Welcome to TRIMER Library
 
-**TRIMER** is a package for building genome-scale integrated metabolic–regulatory models based on Bayesian network. TRIMER can be used for tasks such as 
-knockout phenotypes and  knockout flux prediction.
+**TRIMER** is a package for building genome-scale integrated metabolic–regulatory models based on Bayesian network. The integrated model can be used for tasks such as knockout phenotypes and  knockout flux prediction.
 
 
 ## Table of Contents
