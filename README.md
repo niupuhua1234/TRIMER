@@ -7,9 +7,7 @@
   <a href="https://www.mathworks.com/"><img alt="Python Version" src="https://img.shields.io/badge/R%20version-%3E3.0-orange" /></a>
   <a href="https://github.com//niupuhua1234/TRIMER/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 </p>
-This is an example file with maximal choices selected.
-
-This is a long description.
+# Welcome to EEG Deep Learning Library
 
 ## Table of Contents
 
