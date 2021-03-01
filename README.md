@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/niupuhua1234/TRIMER"> <img width="2000px" src="https://github.com/niupuhua1234/TRIMER/blob/main/logo.png"></a> 
+  <a href="https://github.com/niupuhua1234/TRIMER"> <img width="2500px" src="https://github.com/niupuhua1234/TRIMER/blob/main/logo.png"></a> 
   <br />
   <br />
   <a href="https://www.mathworks.com/"><img alt="Python Version" src="https://img.shields.io/badge/MATLAB-%3E2016-brightgreen" /></a>
@@ -7,12 +7,12 @@
   <a href="https://github.com//niupuhua1234/TRIMER/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 </p>
 <!-- <div align="center">
-     <a href="https://github.com/niupuhua1234/TRIMER"> <img width="2000px" src="https://github.com/niupuhua1234/TRIMER/blob/main/logo.png"></a> 
+     <a href="https://github.com/niupuhua1234/TRIMER"> <img width="2500px" src="https://github.com/niupuhua1234/TRIMER/blob/main/logo.png"></a> 
 </div> -->
 
 --------------------------------------------------------------------------------
 
-# Welcome to EEG Deep Learning Library
+# Welcome to TRIMER Library
 
 **EEG-DL** is a Deep Learning (DL) library written by [TensorFlow](https://www.tensorflow.org) for EEG Tasks (Signals) Classification. It provides the latest DL algorithms and keeps updated. 
 
