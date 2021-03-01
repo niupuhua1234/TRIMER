@@ -1,4 +1,4 @@
-function [f,v,status] =  PROM_Ecoil(trimer,bnumstobekoed,lb_est,ub_est,rxn_affected,vm,varargin)
+function [f,v,status] =  PROM_Ecoil(trimer,lb_est,ub_est,rxn_affected,vm,varargin)
 
 % The  algorithm predicts the growth phenotype and the flux response
 % after transcriptional perturbation, given a metabolic and regulatory
@@ -20,10 +20,7 @@ function [f,v,status] =  PROM_Ecoil(trimer,bnumstobekoed,lb_est,ub_est,rxn_affec
 %        f                  -growth rate    after knock out of all the regulators in the regulatory trimer;
 %        v                  -flux response  after knock out of all the regulators in the regulatory trimer;
 %       status              - solver status 
-%  
-%       EXAMPLE:
-%       load mtbpromdata
-%       [f_ko,v_ko] = prom(trimer,lb_est,ub_est,rxn_affected,vm);
+
 
 %===========================================================
 %% INPUT HANDLING
@@ -32,7 +29,7 @@ p = inputParser;
 p.addParameter('kappa',1);
 p.addParameter('growth_pos',find(trimer.c));
 p.addParameter('method','sfba');
-p.addParameter('delta',0.1);
+p.addParameter('delta',0.3);
 p.addParameter('epsilon',0.001);
 
 p.parse(varargin{:});
@@ -41,6 +38,9 @@ kappa=p.Results.kappa;
 method=p.Results.method;
 delta=p.Results.delta;
 epsilon=p.Results.epsilon;
+if ~iscell(bnumstobekoed)
+    bnumstobekoed={bnumstobekoed};
+end
 %===========================================================
 %% SOME BASIC INITIALIZATION
 %===========================================================
@@ -78,18 +78,21 @@ switch method
         trimerR=add_column(trimer, var_bin,'b',0,1);
         
         % Eliminate almost-zero fluxes
-        fluxWT=v0(1:nRxns);fluxWT(abs(fluxWT)<1e-6) = 0;
+        fluxWT=v0(1:nRxns);fluxWT(abs(fluxWT)<epsilon) = 0;
         % generate auxiliary variables
-        WT_upperTol = fluxWT + delta*abs(fluxWT) + epsilon;
-        WT_lowerTol = fluxWT - delta*abs(fluxWT) - epsilon;
+        WT_upperTol = fluxWT + delta*abs(fluxWT) + epsilon;  
+        WT_lowerTol = fluxWT - delta*abs(fluxWT) - epsilon; 
 
         lnrl=T_linalg({{eye(nRxns),trimer.rxns},{ -diag(trimer.ub -WT_upperTol ) ,var_bin}},'<',WT_upperTol);
         lnru=T_linalg({{eye(nRxns),trimer.rxns},{-diag(trimer.lb-WT_lowerTol ) ,var_bin}},'>',WT_lowerTol);  % constraint for A*v=0, ¦Á+v>0, v-¦Â<0
         lnub=T_linalg({eye(nRxns),trimer.rxns},'<',trimer.ub);
         lnlb=T_linalg({eye(nRxns),trimer.rxns},'>',trimer.lb);  % constraint for A*v=0, ¦Á+v>0, v-¦Â<0
+        trimerR.options=cmpi.get_options();
+        trimerR.options.IntFeasTol=power(10, -round(log10(max(trimer.ub)))-1);
+        
         
         trimerR=add_matrix_constraint(trimerR,{lnrl,lnru,lnub,lnlb},{'upperTol','lowerTol','UB','LB'});
-        trimerR=change_obj(trimerR,[zeros(nRxns,1);-ones(nRxns,1)]);
+        trimerR=change_obj(trimerR,[zeros(nRxns,1);ones(nRxns,1)]);
     case {'moma','MOOA'}        
         % Eliminate almost-zero fluxes
         fluxWT=v0(1:nRxns);fluxWT(abs(fluxWT)<1e-6) = 0;
@@ -106,9 +109,9 @@ weights_alpha=zeros(nRxns,1);
 weights_beta=zeros(nRxns,1); 
 disp('FBA prediction');
 %hw = waitbar(0,'FBA prediction');
-statbar = statusbar(length(bnumstobekoed),true);
+statbar = statusbar(length(lb_est),true);
 statbar.start('Doing FBA');
-for ci = 1:length(bnumstobekoed)
+for ci = 1:length(lb_est)
     
     ub_beta = zeros(nRxns,1); 
     ub_alpha =zeros(nRxns,1);    
@@ -146,20 +149,18 @@ for ci = 1:length(bnumstobekoed)
             trimerM=change_bound(trimerM,ubg,'u');
             sol=moma(trimerM,fluxWT);
         case{'room','ROOM'}
-            lb_bin(temprxnpos) =1;
 
             lnrl=T_linalg({{eye(nRxns),trimer.rxns},{ -diag(trimer.ub -WT_upperTol )  ,var_bin}},'<',WT_upperTol);
             lnru=T_linalg({{eye(nRxns),trimer.rxns},{-diag(trimer.lb-WT_lowerTol ) ,var_bin}},'>',WT_lowerTol);  % constraint for A*v=0, ¦Á+v>0, v-¦Â<0            
             lnub=T_linalg({eye(nRxns),trimer.rxns},'<',ubg);
             lnlb=T_linalg({eye(nRxns),trimer.rxns},'>',lbg);  % constraint for A*v=0, ¦Á+v>0, v-¦Â<0
-        
-            trimerR=add_matrix_constraint(trimerR,{lnrl,lnru,lnub,lnlb},{'upperTol','lowerTol','UB','LB'});
-            trimerR=change_bound(trimerR,lb_bin,'l', var_bin);    
-            sol=   fba(trimerR);
+            
+            trimerR=update_matrix_constraint(trimerR,{lnrl,lnru,lnub,lnlb},{'upperTol','lowerTol','UB','LB'});
+            sol=   cmpi.solve_mip(trimerR);
     end
-    if  ((sol.flag ~= 2) || any(sol.x(grwthpos) < 0))
+    if  ((sol.flag ~= 2) || any(sol.x(grwthpos) < 0)||isempty(sol.x))
         disp(' problem in'); disp(ci);
-        v00(ci,1:nRxns)=zeros(nRxns,1);f00(ci)=0;status(ci)=sol.flag
+        v00(ci,1:nRxns)=zeros(nRxns,1);f00(ci)=0;status(ci)=sol.flag;
     else
         v00(ci,1:nRxns)=sol.x(1:nRxns); f00(ci)=sol.val;status(ci)=sol.flag;   
     end         % if that doesnt work,  display a warning       

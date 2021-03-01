@@ -1,6 +1,6 @@
 
 
-load('ecoli_prom_growth_data.mat');
+load('Ecoli_dataset_PROM.mat');
 
 expression = knnimpute(expression);
 expression = quantilenorm(expression);

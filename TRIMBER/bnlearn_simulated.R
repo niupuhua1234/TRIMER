@@ -5,8 +5,11 @@ a=getwd()
 setwd('D:/я╦ювобть/PROM_Ecoil')
 library(bnlearn)
 library(parallel)
-library(dplyr)
 library(purrr)
+
+
+source("util.R")
+
 
 nNodes=detectCores()
 cpucl <- makeCluster(nNodes)
@@ -37,9 +40,7 @@ arcs.tf<-arcs(random.graph(regulators,method = "melancon", max.degree = 6))
 new_edge=arcs(true.model)
 for (reg in regulators){
 num_edge=sample(targetnum/2,1)
-new_edge=rbind(new_edge,
-               as.matrix(data.frame(from=rep(reg,num_edge),to=targets[sample(targetnum, num_edge)])))
-}
+new_edge=rbind(new_edge,as.matrix(data.frame(from=rep(reg,num_edge),to=targets[sample(targetnum, num_edge)])))}
 arcs(true.model)<-new_edge
 edge.list=arcs(true.model)
 #########################
@@ -60,16 +61,17 @@ names(random.dist)=nodes(true.model)
 #################################
 true.est=custom.fit(true.model,dist = random.dist)
 save(random.dist,edge.list,file='./simulated_data/True_model.Rdata')
-#data=matrix(sample(2,10000*50,replace =TRUE)-1,nrow=10000,ncol=50,dimnames=list(NULL,c(regulators,targets)))
-#data =data.frame(map(as.data.frame(data),~factor(.x,levels = c('0','1'))))
+
 #############################
 print('data generation \n')
 size.list=c(100,200,400,800,1600)
 data.sim = rbn(true.est,2000)
 names(colnames(data.sim ))=NULL
 data.list=list()
+bn.graph=list()
 
-for (kk in range(0,10,1)){
+
+for (kk in seq(10)){
   ##########################
   for (size in size.list){
     sub_data=data.sim[sample(2000,size),]#
@@ -86,81 +88,32 @@ for (kk in range(0,10,1)){
                         'to'  = unlist(rep(regulators,targetnum)))
   black.list=rbind(black.list,set2blacklist(targets))
   
-  
-  for (i in seq(5)){
+  for (i in seq_along(size.list)){
     bn.learn=tabu(data.list[[i]], blacklist =black.list,tabu = 100,score = 'bic',debug = TRUE)
-    diff.edge=setdiff(as.data.frame(arcs(bn.learn)),as.data.frame(arcs(true.model)))
-    
-  
+    bn.graph=c(bn.graph,   bn.learn)    
+    diff.edge=dplyr::setdiff(as.data.frame(arcs(bn.learn)),as.data.frame(arcs(true.model)))
+    difo.edge=dplyr::setdiff(as.data.frame(arcs(true.model)),as.data.frame(arcs(bn.learn)))
     filename=sprintf('./simulated_data/bn_learn_%d_%d.pdf',size.list[i],kk)
     pdf(filename) 
-    graphviz.plot(bn.learn,highlight = list(nodes = unique(c(diff.edge[,1],diff.edge[,2])),
-                          arcs =  diff.edge,col = "darkblue",lwd = 3, lty = "dashed"))
+    bn.graph=graphviz.plot(bn.learn,highlight = list(nodes = unique(c(diff.edge[,1],diff.edge[,2])),
+                          arcs =  diff.edge,col = "red",lwd = 1, lty = "solid"),layout = 'fdp')
     dev.off()
-  
   ##################################################
   # infer the conditioning probabilty  for all model
   ##################################################
     bn.est =bn.fit(bn.learn,data = data.list[[i]])
-    junction = compile(as.grain(bn.est))
-    pa.ch=ancestors.search(bn.learn,targets)
-    #exact.query(pa.ch$from,pa.ch$to)
+    pa.ch=dsep.search(bn.learn,targets,nodes(bn.learn))
     prob.list=appro.query(bn.est,pa.ch$from,pa.ch$to)
     interaction.prob=data.frame("from"=pa.ch$from,"to"=pa.ch$to,"prob"=unlist(prob.list))
     filename=sprintf('./simulated_data/bn_learn_interaction_%d_%d.csv',size.list[i],kk)
     write.csv(interaction.prob,filename)  # saving
-    
   }
 }
 
 
 
 
-appro.query<-function(bn,pa.list,ch.list,method="ls"){
-  if (method=="ls"){
-    str1=paste("(", pa.list, " == '",as.character(0), "')", sep = "")
-    str2 = paste("(", ch.list, " == '",as.character(1), "')", sep = "")
-    prob=vector("list",length(str1))
-    for(k in seq_along(str1)){
-      prob[[k]]=cpquery(bn.est, eval(parse(text=str2[[k]])), eval(parse(text=str1[[k]])),method = "ls")}}
-  else if (method=="lw"){
-    str1=as.list(factor(rep(0,length(pa.list)),levels = c('0','1')))
-    names(str1)=pa.list
-    str2 = paste("(", ch.list, " == '",as.character(1), "')", sep = "")
-    prob=vector("list",length(str2))
-    for(k in seq_along(str1)){
-      prob[[k]]=cpquery(bn.est, eval(parse(text=str2[[k]])),str1[k],method = "lw")}}
-  return(prob)}
-  
 
-exact.query<-function(junc,pa.list,ch.list){
-  query.grain=gRain::querygrain
-  prob=map2(pa.list,ch.list,function(x,y){
-  query.grain(junc,nodes = c(y,x), type = "conditional")})
-  prob=map(prob,~.x[2,1])
-  return (prob)}
-
-
-ancestors.search<-function(bn,node.list) {
-  ancestor=bnlearn::ancestors
-  ancestor.list=map(node.list,function(x){ancestor(bn,x)})
-  child.list=map2(ancestor.list,node.list,function(x,y){rep(y,length(x))})  
-  ances_chil.list=data.frame("from" =unlist(ancestor.list), "to" =unlist(child.list))
-  return( ances_chil.list)
-}
-dsep.search<-function(model,query.list,nodes_list=model$nodes){
-  pairx.list=vector("list" ,length(query.list))
-  sep=function(query){
-    result=unlist(Filter(function (x) !dsep(bn =model ,x = x,y = query),setdiff(nodes_list,query)))
-    print(sprintf('query %s',query))
-    names(result)=NULL
-    return(result)}
-  pairx.list=map(query.list,sep)
-  names(pairx.list)=NULL
-  pairy.list=map2(pairx.list,query.list,function(x,y){rep(y,length(x))}) 
-  pair.list =data.frame("from" =unlist(pairx.list), "to" =unlist(pairy.list))
-  return (pair.list)
-}
 
   
   
