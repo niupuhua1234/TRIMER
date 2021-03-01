@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <a href="https://github.com/niupuhua1234/TRIMER"> <img width="500px" src="https://github.com/niupuhua1234/TRIMER/blob/main/logo.png"></a> 
+  <a href="https://github.com/niupuhua1234/TRIMER"> <img width="2000px" src="https://github.com/niupuhua1234/TRIMER/blob/main/logo.png"></a> 
   <br />
   <br />
   <a href="https://www.anaconda.com/"><img alt="Python Version" src="https://img.shields.io/badge/MATLAB-%3E2016-brightgreen" /></a>
