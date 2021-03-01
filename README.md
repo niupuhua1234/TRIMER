@@ -1,5 +1,3 @@
-# TRIMER :Transcription Regulation Integrated with MEtabolic Regulation
-
 
 <p align="center">
   <a href="https://github.com/niupuhua1234/TRIMER"> <img width="2000px" src="https://github.com/niupuhua1234/TRIMER/blob/main/logo.png"></a> 
