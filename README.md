@@ -12,7 +12,7 @@
 ## Table of Contents
 
 - [Security](#security)
-- [Background](#background)
+- [Introduction](#Introduction)
 - [Install](#install)
 - [Usage](#usage)
 - [API](#api)
