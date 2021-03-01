@@ -4,7 +4,7 @@
   <br />
   <br />
   <a href="https://www.mathworks.com/"><img alt="Python Version" src="https://img.shields.io/badge/MATLAB-%3E2016-brightgreen" /></a>
-  <a href="https://github.com/SuperBruceJia/EEG-DL/blob/master/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
+  <a href="https://github.com//niupuhua1234/TRIMER/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 </p>
 This is an example file with maximal choices selected.
 
