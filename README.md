@@ -39,7 +39,6 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 
 ## Install
 
-This module depends upon a knowledge of [Markdown]().
 
 ```
 ```
