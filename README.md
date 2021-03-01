@@ -1,10 +1,8 @@
 # TRIMER :Transcription Regulation Integrated with MEtabolic Regulation
 
 
-
-
 <p align="center">
-  <a href="https://github.com/SuperBruceJia/EEG-DL"> <img width="500px" src="https://github.com/SuperBruceJia/EEG-DL/raw/master/Logo.png"></a> 
+  #a href="https://github.com/SuperBruceJia/EEG-DL"> <img width="500px" src="https://github.com/SuperBruceJia/EEG-DL/raw/master/Logo.png"></a> 
   <br />
   <br />
   <a href="https://gitter.im/EEG-DL/community"><img alt="Chat on Gitter" src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" /></a>
