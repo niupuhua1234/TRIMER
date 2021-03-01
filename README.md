@@ -1,6 +1,5 @@
 # TRIMER :Transcription Regulation Integrated with MEtabolic Regulation
 
-![banner]()
 
 [![Build Status](https://www.travis-ci.org/{your-name}/{your-repo-name}.svg?branch=master)](https://www.travis-ci.org/{your-name}/{your-repo-name})
 [![license](https://img.shields.io/github/license/:user/:repo.svg)](LICENSE)
