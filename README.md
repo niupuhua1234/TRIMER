@@ -6,7 +6,12 @@
   <a href="https://www.mathworks.com/"><img alt="Python Version" src="https://img.shields.io/badge/R%20version-%3E3.0-orange" /></a>
   <a href="https://github.com//niupuhua1234/TRIMER/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 </p>
+<!-- <div align="center">
+    <a href="https://github.com/SuperBruceJia/EEG-DL"> <img width="500px" src="https://github.com/SuperBruceJia/EEG-DL/raw/master/Logo.png"></a> 
+</div> -->
+
 --------------------------------------------------------------------------------
+
 # Welcome to EEG Deep Learning Library
 
 **EEG-DL** is a Deep Learning (DL) library written by [TensorFlow](https://www.tensorflow.org) for EEG Tasks (Signals) Classification. It provides the latest DL algorithms and keeps updated. 
