@@ -1,4 +1,3 @@
-
 <p align="center">
   <a href="https://github.com/niupuhua1234/TRIMER"> <img width="2000px" src="https://github.com/niupuhua1234/TRIMER/blob/main/logo.png"></a> 
   <br />
@@ -9,7 +8,7 @@
 </p>
 --------------------------------------------------------------------------------
 # Welcome to EEG Deep Learning Library
-
+**EEG-DL** is a Deep Learning (DL) library written by [TensorFlow](https://www.tensorflow.org) for EEG Tasks (Signals) Classification. It provides the latest DL algorithms and keeps updated. 
 ## Table of Contents
 
 - [Security](#security)
