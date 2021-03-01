@@ -14,8 +14,8 @@
 
 # Welcome to TRIMER Library
 
-**TRIMER** is a Deep Learning (DL) library written by [TensorFlow](https://www.tensorflow.org).
-
+**TRIMER** is a package for building genome-scale integrated metabolic–regulatory models based on Bayesian network. TRIMER can be used for tasks such as 
+knockout phenotypes and  knockout flux prediction.
 
 
 ## Table of Contents
@@ -28,7 +28,7 @@
 - [Contributing](#contributing)
 
 ## Introduction
-Transcriptional regulation plays a key role in controlling metabolism and a forefront challenge in modeling organisms today is to build integrated models of regulation and metabolism. Predicting the effect of transcriptional perturbations on the metabolic network can lead to accurate predictions on how genetic mutations and perturbations are translated into flux responses at the metabolic level. TRIMER enables the quantitative integration of regulatory and metabolic networks to build genome-scale integrated metabolic–regulatory models. TRIMER is a Bayesian extension of PROM (Probabilistic Regulation of Metabolism).In TRIMER, transcriptional reguation on the metabolic network is represented by BN(Bayesian Network).
+Transcriptional regulation plays a key role in controlling metabolism and a forefront challenge in modeling organisms today is to build integrated models of regulation and metabolism. Predicting the effect of transcriptional regulations on the metabolic network can lead to accurate predictions on how genetic mutations and perturbations are translated into flux responses at the metabolic level. TRIMER enables the quantitative integration of regulatory and metabolic networks to build genome-scale integrated metabolic–regulatory models. TRIMER is a Bayesian extension of PROM (Probabilistic Regulation of Metabolism).In TRIMER, transcriptional reguation on the metabolic network is represented by BN(Bayesian Network).
 
 The construction of an integrated metabolic-regulatory network using TRIMER requires the following: 1) the reconstructed genome scale metabolic network 2) regulatory network structure, consisting of transcription factors (TF) and their targets 3) gene expression data.  We used TRIMER to build genome-scale models for various model organisms and showed that TRIMER can detect drug targets, identify gene knockout phenotypes with accuracies as high as 95% and predict microbial growth-rates of transcription factor knockout strains quantitatively with correlation of 0.96.
 
