@@ -19,7 +19,6 @@ This is a long description.
 - [Usage](#usage)
 - [API](#api)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Security
 
