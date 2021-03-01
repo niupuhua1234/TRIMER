@@ -33,11 +33,10 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 
 ## Structure of the code
 <p align="center">
-  <a href="https://github.com/niupuhua1234/TRIMER"> <img width="1000px" src="https://github.com/niupuhua1234/TRIMER/blob/main/code_structure.png"></a> 
+  <a href="https://github.com/niupuhua1234/TRIMER"> <img width="500px" src="https://github.com/niupuhua1234/TRIMER/blob/main/code_structure.png"></a> 
 </p>
-<!-- <div align="center">
-     <a href="https://github.com/niupuhua1234/TRIMER"> <img width="1000px" src="https://github.com/niupuhua1234/TRIMER/blob/main/code_structure.png"></a> 
-</div> -->
+
+
 ## Install
 
 This module depends upon a knowledge of [Markdown]().
