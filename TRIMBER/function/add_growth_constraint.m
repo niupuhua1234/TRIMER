@@ -1,4 +1,4 @@
-function [trimer] = add_growth_constraint(trimer,pos,val,varargin)
+function [trimer] = add_growth_constraint(trimer,val,varargin)
 % ADD_GROWTH_CONSTRAINT  Add minimum growth constraint to a model.
 %
 %   [TRIMER,SOL] = ADD_GROWTH_CONSTRAINT(TRIMER,VAL,...params...)
@@ -26,9 +26,10 @@ end
 p = inputParser;
 p.addParamValue('ctype','>');
 p.addParamValue('valtype','frac');
+p.addParamValue('pos',find(trimer.c));
 p.parse(varargin{:});
 
-
+pos=p.Results.pos;
 switch p.Results.valtype
     case 'frac'
         sol = fba(trimer);

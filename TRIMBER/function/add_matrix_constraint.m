@@ -18,7 +18,7 @@ if nargin < 3 || isempty(row_names), row_names = []; end
 linalgs = assert_cell(linalgs);
 for i = 1 : length(linalgs)
     
-    Nrows = size(linalgs{1}.rhs,1);
+    Nrows = size(linalgs{i}.rhs,1);
     Nprev = size(trimer.A,1);
     if isempty(row_names)
         trimer = add_row(trimer,Nrows);

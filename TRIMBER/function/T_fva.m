@@ -29,7 +29,11 @@ vars = convert_ids(trimber.varnames,p.Results.vars,'index');
 nvars = length(vars);
 minflux = zeros(nvars,1);
 maxflux = zeros(nvars,1);
-grwpos=find(trimber.c);
+if ~isfield(trimber,'c')
+    grwpos=find(trimber.obj);
+else
+    grwpos=find(trimber.c);
+end
 
 if strcmp(valtype,'frac')
     sol = cmpi.solve_mip(trimber);
@@ -40,7 +44,8 @@ trimber.lb(grwpos)   = frac;
 statbar = statusbar(nvars,status);
 statbar.start('Flux Variability status');
 for i = 1 : nvars
-    trimber.obj = trimber.c;    
+    trimber.obj(:)=0;
+    trimber.obj(grwpos)=1; 
     
     trimber.obj(vars(i)) = -1;        
     sol = cmpi.solve_mip(trimber);

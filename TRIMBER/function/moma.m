@@ -12,7 +12,6 @@ function [sol] = moma(trimer,flux_vals,flux_ids)
 %   If only a subset of fluxes are specified, the indices can be given in
 %   the vector FLUX_IDS.  The corresponding objective is then:
 %       minimize (v(FLUX_IDS) - FLUX_VALS)^2
-
 N = size(trimer.A,2);
 
 if nargin < 3
