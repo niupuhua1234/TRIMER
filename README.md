@@ -57,7 +57,7 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
     flux_indole.m
     flix_biomass.m
     ```
-    The following matlab script are demo codes for phenotypes prediction.The phenotypes label and boolean network are provided in source_data folder.
+    The following matlab script are demo codes for phenotypes prediction.Phenotypes label, boolean network(***imc1010***) and tiger-trimer model can be found in source_data folder.
     ```text
     prediction_phenotype.m
      ```
