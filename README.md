@@ -21,10 +21,9 @@
 
 - [Security](#security)
 - [Introduction](#Introduction)
-- [Install](#install)
+- [Dependency](#Dependency)
 - [Usage](#usage)
-- [API](#api)
-- [Contributing](#contributing)
+- [Citation](#citation)
 
 ## Introduction
 Transcriptional regulation plays a key role in controlling metabolism and a forefront challenge in modeling organisms today is to build integrated models of regulation and metabolism. Predicting the effect of transcriptional regulations on the metabolic network can lead to accurate predictions on how genetic mutations and perturbations are translated into flux responses at the metabolic level. TRIMER enables the quantitative integration of regulatory and metabolic networks to build genome-scale integrated metabolic–regulatory models. TRIMER is a Bayesian extension of PROM (Probabilistic Regulation of Metabolism).In TRIMER, transcriptional reguation on the metabolic network is represented by BN(Bayesian Network).
