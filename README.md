@@ -37,10 +37,8 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 
 ## Prerequisites
 
-
-```text 
-   CPLEX 12.8
-   glpk
+1. [__CPLEX__](https://www.ibm.com/analytics/cplex-optimizer)
+2. [__GLPK__](https://www.ibm.com/analytics/cplex-optimizer)
 ```
 
 ## Usage 
