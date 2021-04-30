@@ -42,7 +42,8 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 
 ## Usage 
 1. Required input data for Bayesian network learning and flux prediction:
-   __EcoMAC__ A gene expression dataset for E.coli.
+
+   [__EcoMAC__] A gene expression dataset for E.coli.
    The raw gene expression data and binarized gene expression data  can be found in the google drive:
  https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing, https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing .The metabolic model ***iAF260*** and interaction list are already saved  found in folder source_data for convenience.
  
