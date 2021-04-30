@@ -57,14 +57,10 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
     flux_indole.m
     flix_biomass.m
     ```
-
-
-
-
-Note: The `license` badge image link at the top of this file should be updated with the correct `:user` and `:repo`.
-
-### Any optional sections
-
+    The following matlab scrip are demo codes for phenotypes prediction .
+    ```text
+    prediction_phenotype.m
+     ```
 ## Citation
 
 If you find our library useful, please considering citing our paper in your publications. We provide a BibTeX entry below.
