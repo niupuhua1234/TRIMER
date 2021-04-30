@@ -47,7 +47,7 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
    
    __Interaction list__   :we used the interaction list in [__EcoMAC__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4299492/) which are converted form [__RegulonDB 8.1__](http://regulondb.ccg.unam.mx/).
    
-   __The metabolic model__ :we used [__iAF260__](http://bigg.ucsd.edu/models/iAF1260) model in ___.mat___ format. 
+   __The metabolic model__ :we used [__iAF260__](http://bigg.ucsd.edu/models/iAF1260) model in ___.mat___ format. iAF1260 is a metabolic model for E.coli.
    
    For convenience, interaction list and metabolic model are already saved in folder ___source_data___.
  
