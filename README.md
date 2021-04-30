@@ -49,7 +49,7 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
    
    __The metabolic model__ :we used [__iAF260__](http://bigg.ucsd.edu/models/iAF1260) model in ___.mat___ format. iAF1260 is a metabolic model for E.coli.
    
-   For convenience, interaction list and metabolic model are already saved in folder ___source_data___.
+   For convenience, a interaction list and metabolic model are already saved in folder ___source_data___.
  
 2. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The input are binarized gene expression data and interaction list which serve as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
     ```text
@@ -61,7 +61,7 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
     flux_indole.m
     flix_biomass.m
     ```
-    The following matlab script is  a demo code for phenotypes prediction.Phenotypes label, boolean network(***imc1010***) and tiger-trimer model  found in used in the demo code are saved in source_data folder.
+    The following matlab script is  a demo code for phenotypes prediction.The tiger-trimer model used in the demo code are already saved in source_data folder.
     ```text
     prediction_phenotype.m
      ```
