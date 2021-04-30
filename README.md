@@ -43,12 +43,51 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 ```
 ```
 
-### Any optional sections
 
-## Usage
+## Usage Demo
+1. ***(Under Any R environment)*** Run R script,bnlearn.R for Bayesian network learning. The input is binarization gene expression data and interaction list as prior knowledge for structure leaning. The learned BN is saved in bif format which can be read by function read.bif in **bnlearn** package.
 
-```
-```
+    ```text
+    bnlearn.R
+    ```
+
+2. ***(Under Python 2.7 Environment)*** Read the .edf files (One of the raw EEG signals formats) and save them into Matlab .m files via [this script](https://github.com/SuperBruceJia/EEG-DL/blob/master/Download_Raw_EEG_Data/Extract-Raw-Data-Into-Matlab-Files.py). FYI, this script must be executed under the **Python 2 environment (Python 2.7 is recommended)** due to some Python 2 syntax. If using Python 3 environment to run the file, there might be no error, but the labels of EEG tasks would be totally messed up.
+
+    ```text
+    $ python Extract-Raw-Data-Into-Matlab-Files.py
+    ```
+
+3. Preprocessed the Dataset via the Matlab and save the data into the Excel files (training_set, training_label, test_set, and test_label) via [these scripts](https://github.com/SuperBruceJia/EEG-DL/tree/master/Preprocess_EEG_Data) with regards to different models. FYI, every lines of the Excel file is a sample, and the columns can be regarded as features, e.g., 4096 columns mean 64 channels X 64 time points. Later, the models will reshape 4096 columns into a Matrix with the shape 64 channels X 64 time points. You should can change the number of columns to fit your own needs, e.g., the real dimension of your own Dataset.
+
+4. ***(Prerequsites)*** Train and test deep learning models **under the Python 3.6 Environment (Highly Recommended)** for EEG signals / tasks classification via [the EEG-DL library](https://github.com/SuperBruceJia/EEG-DL/tree/master/Models), which provides multiple SOTA DL models.
+
+    ```text
+    Python Version: Python 3.6 (Recommended)
+    TensorFlow Version: TensorFlow 1.13.1
+    ```
+
+    Use the below command to install TensorFlow GPU Version 1.13.1:
+
+    ```python
+    $ pip install --upgrade --force-reinstall tensorflow-gpu==1.13.1 --user
+    ```
+
+5. Read evaluation criterias (through iterations) via the [Tensorboard](https://www.tensorflow.org/tensorboard). You can follow [this tutorial](https://www.guru99.com/tensorboard-tutorial.html). When you finished training the model, you will find the "events.out.tfevents.***" in the folder, e.g., "/Users/shuyuej/Desktop/trained_model/". You can use the following command in your terminal:
+
+    ```python
+    $ tensorboard --logdir="/Users/shuyuej/Desktop/trained_model/" --host=127.0.0.1
+    ```
+
+    You can open the website in the [Google Chrome](https://www.google.com/chrome/) (Highly Recommended). 
+    
+    ```html
+    http://127.0.0.1:6006/
+    ```
+
+    Then you can read and save the criterias into Excel .csv files.
+
+6. Finally, draw beautiful paper photograph using Matlab or Python. Please follow [these scripts](https://github.com/SuperBruceJia/EEG-DL/tree/master/Draw_Photos).
+
 
 Note: The `license` badge image link at the top of this file should be updated with the correct `:user` and `:repo`.
 
