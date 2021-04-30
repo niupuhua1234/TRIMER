@@ -46,12 +46,12 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 
 ## Usage 
 1. The raw gene expression data and binarized gene expression data  can be found in the google drive:
- https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing, https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing
+ https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing, https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing .The metabolic model for Ecoli and interaction list can be found in folder source data.   
 3. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The Input is binarized gene expression data and interaction list as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
     ```text
     bnlearn.R
     ```
-2. ***(Under Matlab Environment)*** The two maltba script shown below are demo codes of  Knock-out flux predicton for indole and biomass.
+2. ***(Under Matlab Environment)*** The two mallab script shown below are demo codes of  Knock-out flux predicton for indole and biomass.
 
     ```text
     $ python Extract-Raw-Data-Into-Matlab-Files.py
