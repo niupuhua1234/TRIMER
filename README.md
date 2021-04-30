@@ -44,14 +44,14 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 ```
 
 
-## Usage Demo
-1. ***(Under Any R environment)*** Run R script,bnlearn.R for Bayesian network learning. The input is binarization gene expression data and interaction list as prior knowledge for structure leaning. The learned BN is saved in bif format which can be read by function read.bif in **bnlearn** package.
-
+## Usage 
+1. The raw gene expression data and binarized gene expression data  can be found in the google drive:
+ https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing, https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing
+3. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The Input is binarized gene expression data and interaction list as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
     ```text
     bnlearn.R
     ```
-
-2. ***(Under Python 2.7 Environment)*** Read the .edf files (One of the raw EEG signals formats) and save them into Matlab .m files via [this script](https://github.com/SuperBruceJia/EEG-DL/blob/master/Download_Raw_EEG_Data/Extract-Raw-Data-Into-Matlab-Files.py). FYI, this script must be executed under the **Python 2 environment (Python 2.7 is recommended)** due to some Python 2 syntax. If using Python 3 environment to run the file, there might be no error, but the labels of EEG tasks would be totally messed up.
+2. ***(Under Matlab Environment)*** The two maltba script shown below are demo codes of  Knock-out flux predicton for indole and biomass.
 
     ```text
     $ python Extract-Raw-Data-Into-Matlab-Files.py
