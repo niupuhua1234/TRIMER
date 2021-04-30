@@ -19,7 +19,6 @@
 
 ## Table of Contents
 
-- [Security](#security)
 - [Introduction](#Introduction)
 - [Dependency](#Dependency)
 - [Usage](#usage)
