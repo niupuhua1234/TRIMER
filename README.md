@@ -51,7 +51,7 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
    
    __Boolean Network__  : we use [__imc1010__](https://systemsbiology.ucsd.edu/InSilicoOrganisms/Ecoli/EcoliRegulations) which is a boolearn regulatory network for ___E.coli___.
    
-   For convenience, interaction list , metabolic model and boolean network are already saved in folder ___source_data___.
+   Interaction list , metabolic model and boolean network we used are already saved in folder ___source_data___ for convenience.
  
 2. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The input are binarized gene expression data and interaction list which serve as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
     ```text
