@@ -45,6 +45,13 @@ function [sol] = solve_mip(mip)
 %                             IntFeasTol  Integer feasibility tolerance
 %                             OptTol      Optimality tolerance
 %                             AbsOptTol   Absolute optimality tolerance
+%                             Emphasis    Controls trade-offs between speed, feasibility, optimality, and moving bounds in MIP.
+%                                         0 Balance optimality and feasibility£¨default)
+%                                         1 Emphasize feasibility over optimality	
+%                                         2 Emphasize optimality over feasibility	
+%                                         3 Emphasize moving best bound	
+%                                         4 Emphasize finding hidden feasible solutions
+%
 %               Q         Quadratic objective matrix.  If given, the
 %                         problem is solved as a MIQP.  See CONVERT_MIQP
 %                         for details on Q and related fields.

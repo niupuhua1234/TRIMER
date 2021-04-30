@@ -180,7 +180,7 @@ methods (Static)
     [opts] = set_glpk_opts(options)
     [mip] = convert_miqp(mip)
     [qtype] = miqp_type(mip)
-    [inf_rows,sol] = find_infeasible_rows(mip,varargin)
+    [mip] = convert_indicators(mip)
     [mip] = bounds_to_constraints(mip,varargin)
     [sol] = run_solver(mip)
 end
