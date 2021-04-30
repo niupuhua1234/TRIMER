@@ -38,7 +38,7 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 ## Prerequisites
 
 1. [__CPLEX__](https://www.ibm.com/analytics/cplex-optimizer)
-2. [__GLPK__](https://www.ibm.com/analytics/cplex-optimizer)
+2. [__GLPK__](https://opencobra.github.io/cobratoolbox/latest/)
 
 ## Usage 
 1. The raw gene expression data and binarized gene expression data  can be found in the google drive:
