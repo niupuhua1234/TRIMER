@@ -57,13 +57,13 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
     ```text
     bnlearn.R
     ```
-3. ***(Under Matlab Environment)*** The two matlab script shown below are demo codes of  knock-out flux predicton for indole and biomass.
+3. ***(Under Matlab Environment)*** The two matlab scripts shown below are demo codes of  knock-out flux predicton for indole and biomass.
 
     ```text
     flux_indole.m
     flix_biomass.m
     ```
-    The following matlab script is  a demo code for phenotypes prediction.The tiger-trimer model used in the demo code are already saved in source_data folder.
+    The following matlab script is  a demo code for phenotypes prediction.The ___Tiger-Trimer___ model used in the demo code are already saved in source_data folder.
     ```text
     prediction_phenotype.m
      ```
