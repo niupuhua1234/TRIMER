@@ -41,13 +41,15 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 2. [__GLPK__](https://opencobra.github.io/cobratoolbox/latest/)
 
 ## Usage 
-1. Required input data for Bayesian network learning and flux prediction:
+1. Required input data for Bayesian network learning and flux prediction.
 
-   __Gene Expression__  we used the expression dataset in [__EcoMAC__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4299492/).For convenience,the raw gene expression data and binarized gene expression data  can be found in [__raw_data__](https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing)and [__bin data__](https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing).
+   __Gene Expression__  :we used the expression dataset in [__EcoMAC__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4299492/).For convenience,the raw gene expression data and binarized gene expression data  can be found in [__raw_data__](https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing)and [__bin data__](https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing).
    
-   __Interaction list__ we used the interaction list in [__EcoMAC__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4299492/) which are converted form [__RegulonDB 8.1__](http://regulondb.ccg.unam.mx/).
+   __Interaction list__ :we used the interaction list in [__EcoMAC__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4299492/) which are converted form [__RegulonDB 8.1__](http://regulondb.ccg.unam.mx/).
    
-   __The metabolic model__ ***iAF260*** and interaction list are already saved  found in folder source_data for convenience.
+   __The metabolic model__ :we used [__iAF260__](http://bigg.ucsd.edu/models/iAF1260) model. 
+   
+   For convenience, interaction list and metabolic model are already saved in folder source_data.
  
 2. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The input are binarized gene expression data and interaction list which serve as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
     ```text
