@@ -35,27 +35,29 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 </p>
 
 
-## Install
+## Prerequisites
 
 
-```
+```text
+
 ```
 
 
 ## Usage 
 1. The raw gene expression data and binarized gene expression data  can be found in the google drive:
- https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing, https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing .The metabolic model ***iAF260*** and interaction list can be found in folder source_data.   
+ https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing, https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing .The metabolic model ***iAF260*** and interaction list are already saved  found in folder source_data for convenience.
+ 
 3. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The input are binarized gene expression data and interaction list which serve as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
     ```text
     bnlearn.R
     ```
-2. ***(Under Matlab Environment)*** The two matlab script shown below are demo codes of  Knock-out flux predicton for indole and biomass.
+2. ***(Under Matlab Environment)*** The two matlab script shown below are demo codes of  knock-out flux predicton for indole and biomass.
 
     ```text
     flux_indole.m
     flix_biomass.m
     ```
-    The following matlab script is  a demo code for phenotypes prediction.Phenotypes label, boolean network(***imc1010***) and tiger-trimer model can be found in source_data folder.
+    The following matlab script is  a demo code for phenotypes prediction.Phenotypes label, boolean network(***imc1010***) and tiger-trimer model  found in used in the demo code are saved in source_data folder.
     ```text
     prediction_phenotype.m
      ```
