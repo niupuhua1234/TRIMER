@@ -54,4 +54,12 @@ Note: The `license` badge image link at the top of this file should be updated w
 
 ### Any optional sections
 
-## API
+## Citation
+If you find our library useful, please considering citing our paper in your publications. We provide a BibTeX entry below.
+@article{niu2021trimer,
+  title={TRIMER: Transcription Regulation Integrated with MEtabolic Regulation},
+  author={Niu, Puhua and Soto, Maria J and Yoon, Byung-Jun and Dougherty, Edward R and Alexander, Francis J and Blaby, Ian and Qian, Xiaoning},
+  journal={bioRxiv},
+  year={2021},
+  publisher={Cold Spring Harbor Laboratory}
+}
