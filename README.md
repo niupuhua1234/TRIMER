@@ -41,14 +41,16 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 2. [__GLPK__](https://opencobra.github.io/cobratoolbox/latest/)
 
 ## Usage 
-1. The raw gene expression data and binarized gene expression data  can be found in the google drive:
+1. Required input data for Bayesian network learning and flux prediction:
+   __EcoMAC__ A gene expression dataset for E.coli.
+   The raw gene expression data and binarized gene expression data  can be found in the google drive:
  https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing, https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing .The metabolic model ***iAF260*** and interaction list are already saved  found in folder source_data for convenience.
  
-3. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The input are binarized gene expression data and interaction list which serve as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
+2. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The input are binarized gene expression data and interaction list which serve as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
     ```text
     bnlearn.R
     ```
-2. ***(Under Matlab Environment)*** The two matlab script shown below are demo codes of  knock-out flux predicton for indole and biomass.
+3. ***(Under Matlab Environment)*** The two matlab script shown below are demo codes of  knock-out flux predicton for indole and biomass.
 
     ```text
     flux_indole.m
