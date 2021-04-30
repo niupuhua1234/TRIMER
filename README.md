@@ -37,8 +37,8 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 
 ## Prerequisites
 
-1. [__CPLEX__](https://www.ibm.com/analytics/cplex-optimizer)
-2. [__GLPK__](https://opencobra.github.io/cobratoolbox/latest/)
+1. [__CPLEX__](https://www.ibm.com/analytics/cplex-optimizer): Interface function for MATLAB are supported in CPLEX solver.
+2. [__GLPK__](https://opencobra.github.io/cobratoolbox/latest/): We use the GLPK solver in [__COBRA__](https://opencobra.github.io/cobratoolbox/latest/) package.
 
 ## Usage 
 1. Required input data for Bayesian network learning and flux prediction.
