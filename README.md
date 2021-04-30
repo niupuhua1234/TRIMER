@@ -43,9 +43,7 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 ## Usage 
 1. Required input data for Bayesian network learning and flux prediction:
 
-   [__EcoMAC__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4299492/) A gene expression dataset for E.coli.
-   The raw gene expression data and binarized gene expression data  can be found in the google drive:
- https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing, https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing .The metabolic model ***iAF260*** and interaction list are already saved  found in folder source_data for convenience.
+   __gene expression__  we used the expression dataset in [__EcoMAC__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4299492/).For convenience,the raw gene expression data and binarized gene expression data  can be found in [__raw_data__](https://drive.google.com/file/d/197DwrvBz8IMmwi3nTO64TV02_23gjIaT/view?usp=sharing)[__bin data__](https://drive.google.com/file/d/1n0MDIhO17n7_Jy158euCU10kuySncbsp/view?usp=sharing) .The metabolic model ***iAF260*** and interaction list are already saved  found in folder source_data for convenience.
  
 2. ***(Under Any R environment)***  Run R script shown below for Bayesian network learning before estimating the regulatory bound for flux prediction. The BN learning is seperated from other part of the package as the process is time-consuming. The input are binarized gene expression data and interaction list which serve as prior knowledge for structure leaning. The learned BN is saved in **.bif** format which can be read by function read.bif in **bnlearn** package.
     ```text
