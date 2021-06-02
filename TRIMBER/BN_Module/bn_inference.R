@@ -63,20 +63,22 @@ Joint.query <-function (bn,ko.tf,pa.ch,rxnGeneMat,rules,max_gene=10,mode='BN')
     #Figure out if any of the reaction states is changed
     rxn.index=states_check(rxn.index,tar,genes,rules)
     ##############
-    evidence=paste("(", reg, " == '",as.character(0), "')", sep = "",collapse = " & ")
+    evidence=paste("(", reg, " == ",as.character(0), ")", sep = "",collapse = " & ")
     for (i in rxn.index){
       prob[[i]]=0
       gene.ko =dplyr::intersect(genes[which(rxnGeneMat[,i]==1)],tar)
       gene.num=sum(length( gene.ko))
       print(sprintf('TF:%s -> reaction :%s regulated by %d genes',paste(reg,sep = "",collapse = " & ") ,i,gene.num))
       #compute the minimum  of  prob vector if gene.num >max_gene or model =='CN'
-      if (gene.num>10 || mode=='CN')
-      {tmp.pach=data.frame('from'=rep(reg,gene.num),'to'=gene.ko)
-      prob[[i]]=max(unlist(appro.query(bn,tmp.pach)))
-      next}
-      #compute the summation of valid states' probs in prob table .
+      if (gene.num>10 || mode=='CN'){
+        tmp.pach=data.frame('from'=rep(reg,gene.num),'to'=gene.ko)
+        prob[[i]]=min(unlist(appro.query(bn,tmp.pach)))
+        }
+      else{
+      #Find all valid states
       state.list = binaryLogic::as.binary(1:(2^gene.num-1),n=gene.num)
       state.list=states_filter(state.list,gene.ko,genes,rules[[i]])
+      #compute the summation of valid states' probs in prob table .
       for (state in state.list){
         gene.on=gene.ko[state] 
         gene.off=gene.ko[!state]
@@ -86,6 +88,7 @@ Joint.query <-function (bn,ko.tf,pa.ch,rxnGeneMat,rules,max_gene=10,mode='BN')
         str= paste(c(event.on,event.off),sep = "",collapse = " & ")
         cmd=paste("cpquery(bn.est, ", str, ", ", evidence, ")", sep = "")
         prob[[i]]= prob[[i]]+eval(parse(text = cmd))
+        }
       }
     }
     prob.list[,j]=prob
@@ -132,8 +135,8 @@ appro.query<-function(bn,pa.ch){
   for(k in seq_along(str1)){print(sprintf('interaction no:%d',k))
     cmd=paste("cpquery(bn, ", str2[[k]], ", ", str1[[k]],")", sep = "")
     prob[[k]]=eval(parse(text=cmd))}
-  interaction.prob=data.frame("from"=pa.ch$from,"to"=pa.ch$to,"prob"=unlist(prob))
-  return(interaction.prob)}
+  #interaction.prob=data.frame("from"=pa.ch$from,"to"=pa.ch$to,"prob"=unlist(prob))
+  return(unlist(prob))}
 
 exact.query<-function(bn,pa.ch){
   pa.list=pa.ch$from
@@ -143,9 +146,9 @@ exact.query<-function(bn,pa.ch){
   prob=purrr::map2(pa.list,ch.list,function(x,y){
     query.grain(junc,nodes = c(y,x), type = "conditional")})
   prob=purrr::map(prob,~.x[2,1])
-  interaction.prob=data.frame("from"=pa.ch$from,"to"=pa.ch$to,"prob"=unlist(prob))
+  #interaction.prob=data.frame("from"=pa.ch$from,"to"=pa.ch$to,"prob"=unlist(prob))
   
-  return (interaction.prob)}
+  return (unlist(prob))}
 
 instant_pkgs <- function(pkgs) { 
   pkgs_miss <- pkgs[which(!pkgs %in% installed.packages()[, 1])]
@@ -159,7 +162,7 @@ instant_pkgs <- function(pkgs) {
   }
 }
 
-instant_pkgs(c("bnlearn", "parallel","dplyr","purrr","R.matlab"))
+instant_pkgs(c("bnlearn", "parallel","dplyr","purrr","R.matlab","binaryLogic"))
 library(bnlearn)
 print('data  loading \n')
 model<-R.matlab::readMat(args[1])
