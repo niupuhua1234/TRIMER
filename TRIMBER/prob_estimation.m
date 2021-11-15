@@ -17,17 +17,15 @@ function [rxn_affected,rxn_prob]=prob_estimation(trimer,ko_tf,expression,express
 %       rxn_prob               - probabilities for temprxnpos  
 
 p = inputParser;
-p.addParameter('litevidence',zeros(length(targets),1));
+p.addParameter('litevidence',[]);
 p.addParameter('prob_prior',[]);
 p.parse(varargin{:});
 
 prob_prior = p.Results.prob_prior;
-litevidence = logical(p.Results.litevidence);
+litevidence = p.Results.litevidence;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Find Probabilities using a Global Threshold
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-lost_xn = false(size(targets));
-elm_xn = false(size(targets));
 probtfgene=zeros(length(targets),1);
 disp('finding probabilities')
 
@@ -35,16 +33,29 @@ data = expression;
 
 % u could set those interactions that u think have strong literature evidence to have predefined  probabilities
 if ~isempty(litevidence)
-    probtfgene(litevidence) = prob_prior(litevidence); 
+    assert(length(litevidence)==length(prob_prior),'the lag vector must have the same length as probability vector');
+    if max(litevidence)>1
+         probtfgene(litevidence)= prob_prior;
+         litevidence_binary=zeros(length(targets),1);
+         litevidence_binary(litevidence)=1;
+         litevidence=litevidence_binary;
+    else
+        probtfgene(litevidence) = prob_prior(litevidence); 
+    end
+else
+    litevidence=zeros(length(targets),1);
 end                        
 for  i = 1:length(targets)
-    k = ismember(expressionid,targets(i)); % [m,n] =ismember  (A,B)   : 判断A中元素是否属于B 。 如果属于 ，m=1 ,  n=在B中的位置.否则 m=0.
-    l = ismember(expressionid,regulator(i));        
-    tec = data(k,:); tec1 = data(l,:);       
     if ~litevidence(i)
-        probtfgene(i)= sum(tec(tec1 == 0))/length(tec(tec1==0));
+        k = find(ismember(expressionid,targets(i)));
+        l = find(ismember(expressionid,regulator(i)));        
+        if  ~isempty(k) && ~isempty(l)
+            tec = data(k,:); tec1 = data(l,:);           
+            probtfgene(i)= sum(tec(tec1 == 0))/length(tec(tec1==0));
+        else
+            probtfgene=1;        
+        end
     end
-    % this formula also gives the same answer  - (sum(~tec1(tec == 1))/length(tec1(tec==1))) * (sum(tec)/sum(~tec1))     
 end
 
 probtfgene(isnan(probtfgene))=1;
