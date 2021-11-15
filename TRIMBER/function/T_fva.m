@@ -1,7 +1,7 @@
-function [minflux,maxflux] = T_fva(trimber,varargin)
+function [minflux,maxflux] = T_fva(trimer,varargin)
 % FVA  Flux Variability Analysis
 %
-%   [MINFLUX,MAXFLUX] = FVA(TRIMBER,...params...)
+%   [MINFLUX,MAXFLUX] = FVA(trimer,...params...)
 %
 %   Calculates the minimum and maximum allowable flux through a reaction
 %   given a minimum fraction of the objective.
@@ -14,7 +14,7 @@ function [minflux,maxflux] = T_fva(trimber,varargin)
 %   'status'  If true (default), a status bar is displayed.
 %   'valtype'  growth constraint type
 p = inputParser;
-p.addParamValue('vars',1:size(trimber.S,2));
+p.addParamValue('vars',1:size(trimer.S,2));
 p.addParamValue('frac',1.0);
 p.addParamValue('valtype','abs');
 p.addParamValue('status',false);
@@ -24,36 +24,45 @@ frac = p.Results.frac;
 status = p.Results.status;
 valtype=p.Results.valtype;
 
-trimber.sense = -1;
-vars = convert_ids(trimber.varnames,p.Results.vars,'index');
+trimer.sense = -1;
+vars = convert_ids(trimer.varnames,p.Results.vars,'index');
 nvars = length(vars);
 minflux = zeros(nvars,1);
 maxflux = zeros(nvars,1);
-if ~isfield(trimber,'c')
-    grwpos=find(trimber.obj);
+if ~isfield(trimer,'c')
+    grwpos=find(trimer.obj);
 else
-    grwpos=find(trimber.c);
+    grwpos=find(trimer.c);
 end
 
 if strcmp(valtype,'frac')
-    sol = cmpi.solve_mip(trimber);
+    sol = cmpi.solve_mip(trimer);
     frac=sol.x(grwpos);
 end
 
-trimber.lb(grwpos)   = frac;
+trimer.lb(grwpos)   = frac;
 statbar = statusbar(nvars,status);
 statbar.start('Flux Variability status');
 for i = 1 : nvars
-    trimber.obj(:)=0;
-    trimber.obj(grwpos)=1; 
+    trimer.obj(:)=0;
+    trimer.obj(grwpos)=1; 
     
-    trimber.obj(vars(i)) = -1;        
-    sol = cmpi.solve_mip(trimber);
-    minflux(i) = sol.x(vars(i));
+
+    trimer.obj(vars(i)) = -1;        
+    sol = cmpi.solve_mip(trimer);
+    if isempty(sol.x)
+        minflux(i) =trimer.lb(vars(i));
+    else
+        minflux(i) = sol.x(vars(i));
+    end
     
-    trimber.obj(vars(i)) = 1;    
-    sol = cmpi.solve_mip(trimber);
-    maxflux(i) = sol.x(vars(i));
+    trimer.obj(vars(i)) = 1;    
+    sol = cmpi.solve_mip(trimer);
+    if isempty(sol.x)
+        maxflux(i)=trimer.ub(vars(i));
+    else
+        maxflux(i) = sol.x(vars(i));
+    end
     
     statbar.update(i);    
 end
