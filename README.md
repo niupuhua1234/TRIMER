@@ -73,9 +73,23 @@ If you find our library useful, please considering citing our paper in your publ
 
 ```bibtex
 @article{niu2021trimer,
-  title={TRIMER: Transcription Regulation Integrated with MEtabolic Regulation},
+  title={TRIMER: Transcription regulation integrated with metabolic regulation},
   author={Niu, Puhua and Soto, Maria J and Yoon, Byung-Jun and Dougherty, Edward R and Alexander, Francis J and Blaby, Ian and Qian, Xiaoning},
-  journal={bioRxiv},
+  journal={Iscience},
+  volume={24},
+  number={11},
+  pages={103218},
   year={2021},
-  publisher={Cold Spring Harbor Laboratory}
+  publisher={Elsevier}
+}
+
+@article{niu2022protocol,
+  title={Protocol for condition-dependent metabolite yield prediction using the TRIMER pipeline},
+  author={Niu, Puhua and Soto, Maria J and Yoon, Byung-Jun and Dougherty, Edward R and Alexander, Francis J and Blaby, Ian and Qian, Xiaoning},
+  journal={STAR protocols},
+  volume={3},
+  number={1},
+  pages={101184},
+  year={2022},
+  publisher={Elsevier}
 }
