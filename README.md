@@ -93,3 +93,14 @@ If you find our library useful, please considering citing our paper in your publ
   year={2022},
   publisher={Elsevier}
 }
+
+@article{niu2023sensitivity,
+  title={Sensitivity analysis of genome-scale metabolic flux prediction},
+  author={Niu, Puhua and Soto, Maria J and Huang, Shuai and Yoon, Byung-Jun and Dougherty, Edward R and Alexander, Francis J and Blaby, Ian and Qian, Xiaoning},
+  journal={Journal of Computational Biology},
+  volume={30},
+  number={7},
+  pages={751--765},
+  year={2023},
+  publisher={Mary Ann Liebert, Inc., publishers 140 Huguenot Street, 3rd Floor New~…}
+}
