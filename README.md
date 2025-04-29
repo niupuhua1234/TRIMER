@@ -37,7 +37,7 @@ The construction of an integrated metabolic-regulatory network using TRIMER requ
 
 ## Prerequisites
 
-1. [__CPLEX__](https://www.ibm.com/analytics/cplex-optimizer):Detail about calling CPLEX function in matlab can be found in CPLEX official website.
+1. [__CPLEX__](https://www.ibm.com/analytics/cplex-optimizer):Detail about calling CPLEX function in matlab can be found in CPLEX official website.  For downloading past versions of CPLEX (e.g. CPLEX 12.8), you should refer to this website:  https://www.ibm.com/academic/home.  Click 'Access software downloads'. After your academic institution issued email is verified, log in your account and click Technology -> Data Science->CPLEX'.
 2. [__GLPK__](https://opencobra.github.io/cobratoolbox/latest/): We suggest using  the GLPK solver in [__COBRA__](https://opencobra.github.io/cobratoolbox/latest/) package as matlab interface are provided.You can either install COBRA or copy the GLPK package to the TRIMER folder.
 
 ## Usage 
